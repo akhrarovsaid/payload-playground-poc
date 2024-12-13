@@ -7,7 +7,7 @@ export interface PlaygroundContextType {
   terminal?: Terminal
   viewport?: ReactElement
   mountFiles: (files: FileSystemTree) => Promise<void>
-  installDependencies: () => Promise<void>
+  installDependencies: () => Promise<number | undefined>
   restartDevServer: () => Promise<void>
   reloadViewport: () => Promise<void>
 }

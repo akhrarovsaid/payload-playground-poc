@@ -29,6 +29,7 @@ export const PlaygroundProvider = ({ children }: { children: ReactNode }) => {
     if (!webContainer) {
       return
     }
+    console.log('MOUNTING FILES')
     await webContainer.mount(files)
   }, [webContainer])
 
@@ -36,20 +37,24 @@ export const PlaygroundProvider = ({ children }: { children: ReactNode }) => {
     if (!webContainer || !terminalRef.current) {
       return
     }
+    console.log('INSTALLING DEPS')
     const process = await webContainer.spawn('pnpm', ['install'])
 
     process.output.pipeTo(new WritableStream({
       write(data) {
         terminalRef.current?.write(data)
+        console.log(data)
       }
     }))
+    
+    return process.exit
   }, [webContainer])
 
   const restartDevServer = useCallback(async () => {
     if (!webContainer || !terminalRef.current) {
       return
     }
-
+    console.log('STARTING DEV SERVER')
     const process = await webContainer.spawn('pnpm', ['dev'])
 
     process.output.pipeTo(new WritableStream({

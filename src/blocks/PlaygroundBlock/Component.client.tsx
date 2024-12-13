@@ -11,7 +11,3 @@ export const PlaygroundBlockClient: React.FC = () => {
     </PlaygroundProvider> 
   )
 }
-
-{/* <PlaygroundProvider>
-  <Playground />
-</PlaygroundProvider> */}
